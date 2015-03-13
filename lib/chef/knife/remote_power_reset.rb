@@ -6,7 +6,7 @@ class Chef
     
       include Knife::RemoteBase    
 
-      banner "knife remote power on NODE"
+      banner "knife remote power reset NODE"
 
       def run
         puts server.reset
