@@ -27,7 +27,7 @@ describe KnifeRemote::Provider::Internap do
       :key => "api_key",
       :api_sig => "e06fff7779f428fbee4a460cb3d55ef9"}
 
-    allow(Net::HTTP).to receive(:post_form).with("http://api.voxel.net/version/1.5", params).and_return(resp)
+    allow(Net::HTTP).to receive(:post_form).with(URI("http://api.voxel.net/version/1.5"), params).and_return(resp)
 
     internap.voxel_devices_power({
       :device_id => "1", 

@@ -24,24 +24,22 @@ module KnifeRemote
         Nokogiri::XML(open("#{API_URL}/version/#{VERSION}?#{URI.encode_www_form(params)}")) 
       end
 
-#      def voxel_devices_power(server)
-#        devices = voxel_devices_list 
-#        device = devices.xpath("//devices/device/[label='#{server}'")
-#        
-#        timestamp = Time.now.iso8601 
-#        sig = Digest::MD5.hexdigest("#{@api_secret}key#{@api_key}methodvoxel.devices.powertimestamp#{timestamp}")
-#        params =  {
-#          "method" => "voxel.devices.power", 
-#          "key" => @api_key,
-#          "timestamp" => timestamp, 
-#          "api_sig" => sig
-#          "device_id" => device.xpath("//id").text,
-#          "power_action" => "off"
-#        }
-#        
-#        uri = "#{API_URL}/version/#{VERSION}?#{URI.encode_www_form(params)}"
-#        Net::HTTP.get_response(URI(uri)).body
-#      end
+      def method_missing(name, *args)
+        rq_args = args[0].merge(:method => name.to_s.gsub("_","."), :timestamp => timestamp, :key => @api_key) 
+        rq_args[:api_sig] = sign(rq_args)
+        uri = "#{API_URL}/version/#{VERSION}"
+        resp = Net::HTTP.post_form(URI(uri), rq_args).body
+        Nokogiri::XML(resp)
+      end
+      
+      private
+      def sign(args) 
+        params = args.sort_by { |k,v| k }.unshift(@api_secret).join("")
+        Digest::MD5.hexdigest(params) 
+      end
+      def timestamp
+        Time.now.iso8601
+      end
     end
   end
 end
