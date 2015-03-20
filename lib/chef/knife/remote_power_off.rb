@@ -8,6 +8,12 @@ class Chef
 
       banner "knife remote power off NODE"
 
+      option :internap,
+        :short => "-i",
+        :long => "--internap",
+        :boolean => true,
+        :default => false
+
       def run
         puts server.off
       end

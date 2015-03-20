@@ -20,4 +20,16 @@ describe "internap server" do
       expect(server.off?).to eq(false)
     end
   end 
+
+  context "power off the server" do 
+    it "is was a successful power off" do
+      resp = Nokogiri::XML("<?xml version=\"1.0\"?><rsp stat=\"ok\"/>")
+
+      api = double(KnifeRemote::Provider::Internap)
+      allow(api).to receive(:voxel_devices_list).and_return(Nokogiri::XML(open(VOXEL_RESPONSE).read))
+      allow(api).to receive(:voxel_devices_power).with({:device_id => "1", :power_action => "off"}).and_return(resp)
+      server = KnifeRemote::Server::Internap.new("server.example.com", api)
+      expect(server.off).to eq(true)
+    end
+  end
 end 

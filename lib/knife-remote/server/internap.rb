@@ -20,7 +20,10 @@ module KnifeRemote
       end
 
       def off
-
+        devices = @api.voxel_devices_list
+        device_id = devices.xpath("//devices/device[label='#{@hostname}']/id").text
+        resp = @api.voxel_devices_power(:device_id => device_id, :power_action => "off") 
+        resp.xpath("//rsp/@stat").first.value == "ok"
       end
 
       def reset
