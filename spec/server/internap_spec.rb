@@ -44,4 +44,16 @@ describe "internap server" do
       expect(server.on).to eq(true)
     end
   end
+
+  context "reset the server" do 
+    it "is a successful reset" do
+      resp = Nokogiri::XML("<?xml version=\"1.0\"?><rsp stat=\"ok\"/>")
+
+      api = double(KnifeRemote::Provider::Internap)
+      allow(api).to receive(:voxel_devices_list).and_return(Nokogiri::XML(open(VOXEL_RESPONSE).read))
+      allow(api).to receive(:voxel_devices_power).with({:device_id => "1", :power_action => "reboot"}).and_return(resp)
+      server = KnifeRemote::Server::Internap.new("server.example.com", api)
+      expect(server.reset).to eq(true)
+    end
+  end
 end 
