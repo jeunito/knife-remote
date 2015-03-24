@@ -8,6 +8,12 @@ class Chef
 
       banner "knife remote power reset NODE"
 
+      option :internap,
+        :short => "-i",
+        :long => "--internap",
+        :boolean => true,
+        :default => false
+
       def run
         puts server.reset
       end
