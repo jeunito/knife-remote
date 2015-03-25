@@ -80,6 +80,4 @@ describe KnifeRemote::Provider::Internap do
       :power_action => "reboot"
     })
   end
-
-  it "connects to console"
 end

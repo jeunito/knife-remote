@@ -37,7 +37,11 @@ module KnifeRemote
       end
 
       def console
-
+        devices = @api.voxel_devices_list
+        ssh_host = devices.xpath("//devices/device[label='#{@hostname}']/access_methods/remote_ssh_console/ssh_host").text
+        ssh_usr  = devices.xpath("//devices/device[label='#{@hostname}']/access_methods/remote_ssh_console/ssh_username").text
+        ssh_pwd  = devices.xpath("//devices/device[label='#{@hostname}']/access_methods/remote_ssh_console/ssh_password").text
+        exec("sshpass -p #{ssh_pwd} ssh #{ssh_usr}@#{ssh_host}") 
       end
     end
   end
