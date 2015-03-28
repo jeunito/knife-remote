@@ -7,7 +7,7 @@ module KnifeRemote
       API_URL = "http://api.voxel.net"
       VERSION = "1.5" 
 
-      def initialize(api_key, api_secret)
+      def initialize(api_key = nil, api_secret = nil)
         @api_key, @api_secret = api_key, api_secret
       end
 
@@ -30,6 +30,12 @@ module KnifeRemote
         uri = "#{API_URL}/version/#{VERSION}"
         resp = Net::HTTP.post_form(URI(uri), rq_args).body
         Nokogiri::XML(resp)
+      end
+
+      def configure(username, password)
+        uri = "https://#{username}:#{password}@api.voxel.net/version/1.5"
+        xml = Nokogiri::XML(Net::HTTP.post_form(URI(uri), { :method => "voxel.hapi.authkeys.read" }).body)
+        [ xml.xpath("//authkey/key").text, xml.xpath("//authkey/secret").text ]
       end
       
       private

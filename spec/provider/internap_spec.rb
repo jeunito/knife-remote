@@ -80,4 +80,16 @@ describe KnifeRemote::Provider::Internap do
       :power_action => "reboot"
     })
   end
+
+  it "creates a hapi key/secret pair" do 
+    xml = "<?xml version=\"1.0\"?>
+<rsp stat=\"ok\"><authkey><key>key</key><secret>secret</secret><username>username</username><user_type>subuser</user_type></authkey></rsp>"
+    resp = double(Net::HTTPResponse)
+    allow(resp).to receive(:body).and_return(xml)
+
+    internap = KnifeRemote::Provider::Internap.new() 
+    expect(Net::HTTP).to receive(:post_form).with(URI("https://username:password@api.voxel.net/version/1.5"), { :method => "voxel.hapi.authkeys.read" }).and_return(resp)
+
+    expect(internap.configure("username", "password")).to eq(["key", "secret"])
+  end
 end
