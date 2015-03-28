@@ -58,6 +58,10 @@ class Chef
         end
         Chef::Config[:knife][:ipmi_user]
       end
+
+      def internap 
+        KnifeRemote::Provider::Internap.new(Chef::Config[:knife]["voxel_api_key"], Chef::Config[:knife]["voxel_api_secret"])
+      end
     end
   end
 end
