@@ -16,7 +16,7 @@ class Chef
         :default => false
 
       def run
-        if config[:internap] && Kernel.system("which sshpass") == false
+        if config[:internap] && Kernel.system("which sshpass > /dev/null") == false
           ui.fatal "sshpass required but not found"  
           exit 2
         end 
