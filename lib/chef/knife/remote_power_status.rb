@@ -31,6 +31,12 @@ class Chef
         :boolean => true,
         :default => false
 
+      option :softlayer,
+        :short => "-i",
+        :long => "--softlayer",
+        :boolean => true,
+        :default => false
+
       def run
           puts "Power is " + if server.on?
             "On"

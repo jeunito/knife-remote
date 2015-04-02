@@ -3,6 +3,7 @@ require 'chef/node'
 require 'rubyipmi'
 require 'knife-remote/server/local'
 require 'knife-remote/server/internap'
+require 'knife-remote/server/softlayer'
 require 'knife-remote/provider/internap'
 
 class Chef
@@ -18,6 +19,8 @@ class Chef
         if config[:internap] 
           api = KnifeRemote::Provider::Internap.new(Chef::Config[:knife]["voxel_api_key"], Chef::Config[:knife]["voxel_api_secret"])
           KnifeRemote::Server::Internap.new(name_args[0], api) 
+        elsif config[:softlayer]
+          KnifeRemote::Server::Softlayer.new(name_args[0])
         else
           begin 
             @conn = Rubyipmi.connect(remote_user, remote_pass, remote_ip)
