@@ -14,6 +14,11 @@ class Chef
         :boolean => true,
         :default => false
 
+      option :softlayer,
+        :long => "--softlayer",
+        :boolean => true,
+        :default => false
+
       def run
         puts server.on
       end
