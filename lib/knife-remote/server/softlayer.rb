@@ -61,7 +61,7 @@ module KnifeRemote
         ipmi_account = api.service_named("Hardware_Server").object_with_id(server[0]["id"]).getRemoteManagementAccounts
         ipmi_server = api.service_named("Hardware_Server").object_with_id(server[0]["id"]).getRemoteManagementComponent
 
-        exec("ipmitool -U #{ipmi_account["username"]} -P #{ipmi_account["password"]} -H #{ipmi_server["ipmiIpAddress"]} -I lanplus sol activate")
+        exec("ipmitool -U #{ipmi_account[0]["username"]} -P #{ipmi_account[0]["password"]} -H #{ipmi_server["ipmiIpAddress"]} -I lanplus sol activate")
       end
 
       private
