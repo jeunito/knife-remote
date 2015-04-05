@@ -13,6 +13,11 @@ class Chef
         :long => "--internap",
         :boolean => true,
         :default => false
+      
+      option :softlayer,
+        :long => "--softlayer",
+        :boolean => true,
+        :default => false
 
       def run
         puts server.reset
