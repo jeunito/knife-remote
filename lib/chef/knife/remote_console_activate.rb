@@ -15,6 +15,11 @@ class Chef
         :boolean => true,
         :default => false
 
+      option :softlayer,
+        :long => "--softlayer",
+        :boolean => true,
+        :default => false
+
       def run
         if config[:internap] && Kernel.system("which sshpass") == false
           ui.fatal "sshpass required but not found"  
