@@ -57,7 +57,7 @@ describe "internap server" do
     end
   end
 
-  context "reset the server" do 
+  context "connects via remote console" do 
     it "is a successful reset" do
       api = double(KnifeRemote::Provider::Internap)
       allow(api).to receive(:voxel_devices_list).and_return(Nokogiri::XML(open(VOXEL_RESPONSE).read))
