@@ -10,7 +10,7 @@ class Chef
 
       def run
         unless name_args.size == 1
-          ui.fatal "USAGE: knife remote configure [local | internap]"
+          ui.fatal "USAGE: knife remote configure [local | internap | softlayer]"
           exit 2
         end 
 
@@ -34,6 +34,18 @@ Place the following in your knife.rb:
 knife[:voxel_api_key] = "#{key}" voxel api key (required)
 knife[:voxel_api_secret] = "#{secret}" voxel api secret (required)
           }
+        elsif provider == "softlayer"
+          puts %Q{
+Generate api access key via the customer portal: 
+
+Go to https://control.softlayer.com/account/user/profile and look under "API Access Information"
+
+Place the following in your knife.rb: 
+
+knife[:softlayer_api_key] = "softlayer api key"
+knife[:softlayer_user] = "username"
+          }          
+          
         end
       end
     end
