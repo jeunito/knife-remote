@@ -5,6 +5,7 @@ Gem::Specification.new do |gem|
   gem.summary		= %q{Interact with baremetal servers on different providers using knife}
   gem.homepage		= "http://github.com/jeunito/knife-remote"
   gem.add_runtime_dependency 'rubyipmi'
+  gem.add_runtime_dependency 'softlayer_api'
 
   gem.files		= `git ls-files`.split($\)
   gem.name		= "knife-remote"
