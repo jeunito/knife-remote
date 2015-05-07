@@ -12,7 +12,6 @@ module KnifeRemote
       end
 
       def voxel_devices_list
-        timestamp = Time.now.iso8601 
         sig = Digest::MD5.hexdigest("#{@api_secret}key#{@api_key}methodvoxel.devices.listtimestamp#{timestamp}")
         params =  {
           "method" => "voxel.devices.list", 
