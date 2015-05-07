@@ -6,7 +6,10 @@ require 'time'
 describe KnifeRemote::Provider::Internap do
   it "lists devices" do
     internap = KnifeRemote::Provider::Internap.new("api_key", "api_secret") 
-    allow(Time).to receive(:now).and_return(Time.mktime(2015,3,16,23,01,32,7))
+
+    t = double()
+    allow(t).to receive(:iso8601).and_return("2015-03-16T23:01:32-07:00")
+    allow(Time).to receive(:now).and_return(t)
 
     expect(internap).to receive(:open).with("http://api.voxel.net/version/1.5?method=voxel.devices.list&key=api_key&timestamp=2015-03-16T23%3A01%3A32-07%3A00&api_sig=0231d58891b065b34a8b3d2c26afd9cc")
     internap.voxel_devices_list
@@ -14,7 +17,10 @@ describe KnifeRemote::Provider::Internap do
 
   it "powers off" do
     internap = KnifeRemote::Provider::Internap.new("api_key", "api_secret") 
-    allow(Time).to receive(:now).and_return(Time.mktime(2015,3,16,23,1,32,7))
+
+    t = double()
+    allow(t).to receive(:iso8601).and_return("2015-03-16T23:01:32-07:00")
+    allow(Time).to receive(:now).and_return(t)
 
     resp = double(Net::HTTPResponse)
     allow(resp).to receive(:body)
@@ -37,7 +43,10 @@ describe KnifeRemote::Provider::Internap do
 
   it "powers on server" do
     internap = KnifeRemote::Provider::Internap.new("api_key", "api_secret") 
-    allow(Time).to receive(:now).and_return(Time.mktime(2015,3,16,23,1,32,7))
+
+    t = double()
+    allow(t).to receive(:iso8601).and_return("2015-03-16T23:01:32-07:00")
+    allow(Time).to receive(:now).and_return(t)
 
     resp = double(Net::HTTPResponse)
     allow(resp).to receive(:body)
@@ -60,7 +69,10 @@ describe KnifeRemote::Provider::Internap do
 
   it "resets the server" do
     internap = KnifeRemote::Provider::Internap.new("api_key", "api_secret") 
-    allow(Time).to receive(:now).and_return(Time.mktime(2015,3,16,23,1,32,7))
+
+    t = double()
+    allow(t).to receive(:iso8601).and_return("2015-03-16T23:01:32-07:00")
+    allow(Time).to receive(:now).and_return(t)
 
     resp = double(Net::HTTPResponse)
     allow(resp).to receive(:body)
