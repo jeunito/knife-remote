@@ -28,6 +28,10 @@ module KnifeRemote
       def console
         exec("ipmitool -U #{@rubyipmi.options["U"]} -P #{@rubyipmi.options["P"]} -H #{@rubyipmi.options["H"]} -I lanplus sol activate") 
       end
+
+      def ip 
+        @rubyipmi.options["H"]
+      end
     end 
   end
 end  
