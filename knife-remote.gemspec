@@ -6,6 +6,7 @@ Gem::Specification.new do |gem|
   gem.homepage		= "http://github.com/jeunito/knife-remote"
   gem.add_runtime_dependency 'rubyipmi'
   gem.add_runtime_dependency 'softlayer_api'
+  gem.add_runtime_dependency 'mechanize'
 
   gem.files		= `git ls-files`.split($\)
   gem.name		= "knife-remote"
