@@ -1,15 +1,22 @@
-require 'knife-remote/provider'
+require 'knife-remote/provider/utils'
 require 'mechanize'
-require 'chef/knife'
+require 'chef/knife' 
+require 'chef/knife/remote_console_capture'
+
 
 describe KnifeRemote::Provider::Utils do
   it "downloads screenshot" do
+    
+    capture_command = Chef::Knife::RemoteConsoleCapture.new
+
     agent = double()
     expect(Mechanize).to receive(:new).and_return(agent)
-    ip = "10.0.0.1"
 
+    ip = "10.0.0.1"
     server = double()
     allow(server).to receive(:ip).and_return(ip)
+
+    allow(capture_command).to receive(:server).and_return(server)
 
     login_page = double()
 
@@ -47,6 +54,6 @@ describe KnifeRemote::Provider::Utils do
     expect(agent).to receive(:get).once.with("http://#{ip}/cgi/url_redirect.cgi?#{URI.encode_www_form(params)}").and_return(img)
     expect(img).to receive(:save)
 
-    KnifeRemote::Provider::Utils.console_screenshot(server)
+    capture_command.run 
   end
 end

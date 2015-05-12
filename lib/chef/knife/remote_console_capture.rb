@@ -4,7 +4,8 @@ require 'knife-remote/provider/utils'
 class Chef
   class Knife
     class RemoteConsoleCapture < Knife
-    
+
+      include KnifeRemote::Provider::Utils
       include Knife::RemoteBase    
 
       banner "knife console capture NODE"
