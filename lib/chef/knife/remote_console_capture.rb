@@ -1,5 +1,5 @@
 require 'chef/knife/remote_base'
-require 'knife-remote/provider'
+require 'knife-remote/provider/utils'
 
 class Chef
   class Knife
