@@ -5,7 +5,7 @@ module KnifeRemote
     module Utils
       def console_screenshot(server)
         agent = Mechanize.new     
-        ip = server.ip 
+        ip = server.ipmi_ip
 
         login_page = agent.get("http://#{ip}")
         login = login_page.form "form1"

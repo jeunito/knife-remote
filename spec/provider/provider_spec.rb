@@ -6,7 +6,7 @@ require 'chef/knife/remote_console_capture'
 
 describe KnifeRemote::Provider::Utils do
   it "downloads screenshot" do
-    
+
     capture_command = Chef::Knife::RemoteConsoleCapture.new
 
     agent = double()
@@ -14,7 +14,7 @@ describe KnifeRemote::Provider::Utils do
 
     ip = "10.0.0.1"
     server = double()
-    allow(server).to receive(:ip).and_return(ip)
+    allow(server).to receive(:ipmi_ip).and_return(ip)
 
     allow(capture_command).to receive(:server).and_return(server)
 
