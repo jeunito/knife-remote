@@ -10,7 +10,7 @@ class Chef
       banner "knife console capture NODE"
 
       def run
-        KnifeRemote::Provider::Utils.console_screenshot server
+        console_screenshot server
       end
     end
   end

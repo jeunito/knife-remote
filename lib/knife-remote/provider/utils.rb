@@ -3,7 +3,7 @@ require 'mechanize'
 module KnifeRemote
   module Provider
     module Utils
-      def Utils.console_screenshot(server)
+      def console_screenshot(server)
         agent = Mechanize.new     
         ip = server.ip 
 
