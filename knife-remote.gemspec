@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'rubyipmi'
   gem.add_runtime_dependency 'softlayer_api'
   gem.add_runtime_dependency 'mechanize'
+  gem.add_runtime_dependency 'nokogiri'
 
   gem.files		= `git ls-files`.split($\)
   gem.name		= "knife-remote"
