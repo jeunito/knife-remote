@@ -24,7 +24,7 @@ class Chef
         else
           begin 
             @conn = Rubyipmi.connect(remote_user, remote_pass, remote_ip)
-            KnifeRemote::Server::Local.new(@conn)
+            KnifeRemote::Server::Local.new(@conn, name_args[0])
           rescue NoMethodError
             ui.fatal "IPMI not setup on #{name_args[0]}"
             exit 2

@@ -1,8 +1,10 @@
 module KnifeRemote
   module Server
     class Local 
-      def initialize(rubyipmi)
-        @rubyipmi = rubyipmi
+      attr_reader :fqdn
+
+      def initialize(rubyipmi, fqdn)
+        @rubyipmi, @fqdn = rubyipmi, fqdn
       end 
 
       def on?
