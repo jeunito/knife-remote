@@ -15,6 +15,7 @@ describe KnifeRemote::Provider::Utils do
     ip = "10.0.0.1"
     server = double()
     allow(server).to receive(:ipmi_ip).and_return(ip)
+    allow(server).to receive(:fqdn).and_return("server.example.com")
 
     allow(capture_command).to receive(:server).and_return(server)
 
@@ -42,7 +43,8 @@ describe KnifeRemote::Provider::Utils do
     allow(Time).to receive(:now).and_return(utc)
     strftime = double()
     allow(utc).to receive(:utc).and_return(strftime)
-    allow(strftime).to receive(:strftime).with("%a %b %d %Y %H:%M:%S GMT").and_return("Fri May 08 2015 21:52:08 GMT")
+    allow(strftime).to receive(:strftime).once.with("%a %b %d %Y %H:%M:%S GMT").and_return("Fri May 08 2015 21:52:08 GMT")
+    allow(strftime).to receive(:strftime).once.with("%Y%m%d_%H%M").and_return("20150508_2152")
 
     params = {
       "time_stamp" => "Fri May 08 2015 21:52:08 GMT",
@@ -52,7 +54,7 @@ describe KnifeRemote::Provider::Utils do
 
     img = double()
     expect(agent).to receive(:get).once.with("http://#{ip}/cgi/url_redirect.cgi?#{URI.encode_www_form(params)}").and_return(img)
-    expect(img).to receive(:save)
+    expect(img).to receive(:save).with("server.example.com_screenshot_20150508_2152_GMT.bmp")
 
     capture_command.run 
   end

@@ -16,14 +16,15 @@ module KnifeRemote
         
         agent.get("http://#{ip}/cgi/CapturePreview.cgi")
 
+        time_now = Time.now.utc
         params = {
-          "time_stamp" => Time.now.utc.strftime("%a %b %d %Y %H:%M:%S GMT"),
+          "time_stamp" => time_now.strftime("%a %b %d %Y %H:%M:%S GMT"),
           "url_name" => "Snapshot",
           "url_type" => "img",
         }
         
         img = agent.get("http://#{ip}/cgi/url_redirect.cgi?#{URI.encode_www_form(params)}") 
-        puts img.save("test.bmp")
+        img.save("#{server.fqdn}_screenshot_#{time_now.strftime("%Y%m%d_%H%M")}_GMT.bmp")
       end 
     end
   end
