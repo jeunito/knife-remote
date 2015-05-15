@@ -24,7 +24,11 @@ module KnifeRemote
         }
         
         img = agent.get("http://#{ip}/cgi/url_redirect.cgi?#{URI.encode_www_form(params)}") 
-        img.save("#{server.fqdn}_screenshot_#{time_now.strftime("%Y%m%d_%H%M")}_GMT.bmp")
+        
+        file_name = "#{server.fqdn}_screenshot_#{time_now.strftime("%Y%m%d_%H%M")}_GMT.bmp"
+        img.save(file_name)
+
+        file_name
       end 
     end
   end
