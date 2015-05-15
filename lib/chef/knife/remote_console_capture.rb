@@ -11,7 +11,14 @@ class Chef
       banner "knife console capture NODE"
 
       def run
-        console_screenshot server
+        filename = console_screenshot server
+        begin 
+          fork {
+            `open #{filename}`
+          }
+        rescue
+          puts "This feature is not supported on non nix oses."
+        end
       end
     end
   end
