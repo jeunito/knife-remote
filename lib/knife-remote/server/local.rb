@@ -1,3 +1,5 @@
+require 'chef/knife'
+
 module KnifeRemote
   module Server
     class Local 
@@ -28,7 +30,7 @@ module KnifeRemote
       end
 
       def console
-        exec("ipmitool -U #{@rubyipmi.options["U"]} -P #{@rubyipmi.options["P"]} -H #{@rubyipmi.options["H"]} -I lanplus sol activate") 
+        exec("#{File.join(Chef::Config[:knife][:remote][:ipmitool], "ipmitool")} -U #{@rubyipmi.options["U"]} -P #{@rubyipmi.options["P"]} -H #{@rubyipmi.options["H"]} -I lanplus sol activate") 
       end
 
       def ipmi_ip
