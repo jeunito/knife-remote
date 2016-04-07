@@ -2,9 +2,6 @@ require 'chef/knife'
 require 'chef/node'
 require 'rubyipmi'
 require 'knife-remote/server/local'
-require 'knife-remote/server/internap'
-require 'knife-remote/server/softlayer'
-require 'knife-remote/provider/internap'
 
 class Chef
   class Knife
