@@ -16,19 +16,12 @@ class Chef
           exit 1
         end
 
-        if config[:internap] 
-          api = KnifeRemote::Provider::Internap.new(Chef::Config[:knife]["voxel_api_key"], Chef::Config[:knife]["voxel_api_secret"])
-          KnifeRemote::Server::Internap.new(name_args[0], api) 
-        elsif config[:softlayer]
-          KnifeRemote::Server::Softlayer.new(name_args[0])
-        else
-          begin 
-            @conn = Rubyipmi.connect(remote_user, remote_pass, remote_ip)
-            KnifeRemote::Server::Local.new(@conn, name_args[0])
-          rescue NoMethodError
-            ui.fatal "IPMI not setup on #{name_args[0]}"
-            exit 2
-          end
+        begin 
+          @conn = Rubyipmi.connect(remote_user, remote_pass, remote_ip)
+          KnifeRemote::Server::Local.new(@conn, name_args[0])
+        rescue NoMethodError
+          ui.fatal "IPMI not setup on #{name_args[0]}"
+          exit 2
         end
       end 
 
@@ -60,10 +53,6 @@ class Chef
           exit 1
         end
         Chef::Config[:knife][:ipmi_user]
-      end
-
-      def internap 
-        KnifeRemote::Provider::Internap.new(Chef::Config[:knife]["voxel_api_key"], Chef::Config[:knife]["voxel_api_secret"])
       end
     end
   end

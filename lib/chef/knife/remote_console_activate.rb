@@ -9,23 +9,7 @@ class Chef
 
       banner "knife remote console activate NODE"
 
-      option :internap,
-        :short => "-i",
-        :long => "--internap",
-        :boolean => true,
-        :default => false
-
-      option :softlayer,
-        :long => "--softlayer",
-        :boolean => true,
-        :default => false
-
       def run
-        if config[:internap] && Kernel.system("which sshpass > /dev/null") == false
-          ui.fatal "sshpass required but not found"  
-          exit 2
-        end 
-
         server.console
       end
     end

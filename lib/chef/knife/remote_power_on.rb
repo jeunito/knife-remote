@@ -8,17 +8,6 @@ class Chef
 
       banner "knife remote power on NODE"
 
-      option :internap,
-        :short => "-i",
-        :long => "--internap",
-        :boolean => true,
-        :default => false
-
-      option :softlayer,
-        :long => "--softlayer",
-        :boolean => true,
-        :default => false
-
       def run
         puts server.on
       end
