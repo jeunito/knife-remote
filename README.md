@@ -1,14 +1,14 @@
 # knife-remote
 
-knife-remote is a knife plugin that exposes a basic set of ipmi commands and provides remote access via ipmi or ssh (where available) to servers in a self hosted datacenter/servers hosted on Internap. 
+knife-remote is a knife plugin that exposes a basic set of ipmi commands and provides remote access via ipmi to baremetal servers. 
 
 ## List of available commands
 
 ```bash
 knife remote configure PROVIDER
-knife remote console activate (--internap) NODE
-knife remote power off (--internap) NODE
-knife remote power on (--internap) NODE
-knife remote power reset (--internap) NODE
-knife remote power status (--internap) NODE
+knife remote console activate NODE
+knife remote power off NODE
+knife remote power on NODE
+knife remote power reset NODE
+knife remote power status NODE
 ```
