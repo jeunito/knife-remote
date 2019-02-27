@@ -1,5 +1,5 @@
 Gem::Specification.new do |gem|
-  gem.authors		= ["Jeune Asuncion"]
+  gem.authors		= ["Jose Asuncion"]
   gem.email		= ["jeunito@gmail.com"]
   gem.description	= %q{Interact with baremetal servers on different providers using knife}
   gem.summary		= %q{Interact with baremetal servers on different providers using knife}
